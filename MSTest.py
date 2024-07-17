@@ -1,5 +1,6 @@
 from msal import PublicClientApplication
-
+import webbrowser
+import g4f
 app = PublicClientApplication(
     "your_client_id",
     authority="https://login.microsoftonline.com/common")
@@ -21,9 +22,9 @@ if accounts:
   if not result:
     # So no suitable token exists in cache. Let's get a new one from Azure AD.
     result = app.acquire_token_interactive(scopes=["User.Read"])
-if "access_token" in result:
+  if "access_token" in result:
     print(result["access_token"])  # Yay!
-else:
+  else:
     print(result.get("error"))
     print(result.get("error_description"))
     print(result.get("correlation_id"))  # You may need this when reporting a bug
